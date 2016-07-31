@@ -33,6 +33,9 @@ Adafruit_SSD1306 display(OLED_RESET);
 //Set the ventilation threshold of the DEWPOINT in degrees celcius. I recccomend it being greater than 1, as that seems to be the margin of error for these sensors
 #define VENTTHRESHOLD 1.5
 
+//Set cutoff temp for ventilation, celcius
+#define TEMPCUTOFF 15
+
 //Define sensor objects
 BME280 sensorIn;
 BME280 sensorOut;
@@ -122,7 +125,7 @@ void loop() {
   //Decide whether to vent
   if(subcount==(60*RELAYINTERVAL)){
     subcount=1;
-    if ((dpOut+VENTTHRESHOLD)<dpIn){
+    if ( ((dpOut+VENTTHRESHOLD)<dpIn) and (tempOut>15) ){
         if(!vent){relayCount++;}
         vent=true;
         digitalWrite(RELAY1,LOW);
@@ -160,13 +163,13 @@ void loop() {
   if(vent){display.println("Venting");}
   else{display.println("Not Venting");}
   display.print("VentTime:");
-  display.println(float(ventingCount)/60,3);
+  display.println(float(ventingCount)/60,2);
   display.print("OffTime:");
-  display.println(float(notVentingCount)/60,3);
+  display.println(float(notVentingCount)/60,2);
 
 
   display.print("TimeAlive: ");
-  display.println(float(loopCount)/3600,3);
+  display.println(float(loopCount)/3600,2);
   display.print("RelayCycles:");
   display.println(relayCount);
   display.print("Updating in: ");
@@ -195,5 +198,4 @@ float dewpoint(float temperature, float humidity){
 
 
    
-
 
