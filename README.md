@@ -16,6 +16,6 @@ connections. Based on this thread https://github.com/aws/aws-iot-device-sdk-embe
 this appears to have just been made possible.
 
 Given this functionality, I would use MQTT messaging to publish sensor data to Amazon IoT, where it would be
-forward to a database to be accessed by Web of Moble applications. I would also use MQTT to allow remote 
+forward to a database to be accessed by Web or Moble applications. I would also use MQTT to allow remote 
 control of the ventilation parameters.
 
