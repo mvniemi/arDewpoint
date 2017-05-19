@@ -68,9 +68,9 @@ void setup()   {
   
   //Initialize Sensors
   sensorIn.settings.commInterface = I2C_MODE;
-  sensorOut.settings.I2CAddress = 0x77;
+  sensorIn.settings.I2CAddress = 0x77;
 
-  sensorIn.settings.commInterface = I2C_MODE;
+  sensorOut.settings.commInterface = I2C_MODE;
   sensorOut.settings.I2CAddress = 0x76;
 
   sensorIn.settings.runMode = 3; //Normal mode
